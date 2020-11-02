@@ -3,13 +3,12 @@
 ### Objetivos
 Los objetivos de esta práctica son: 
 
-* Ejecutar comandos de Linux en la máquina virtual (VM) de la asignatura
+* Que el alumnado sepa ejecutar comandos de Linux en la máquina virtual (VM) de la asignatura
 * Ser capaz de desarrollar, editar de forma remota usando VSC, compilar y ejecutar programas escritos en C++ en su VM
 * Que el alumnado codifique sus programas siguiendo lo estipulado en la Guía de Estilo de código de Google
 * Que el alumno sea capaz de formatear su código en VSC siguiendo la guia de Estilo de Google
 * Que el alumnado utilice la utilidad make y ficheros Makefile en sus proyectos
-* Poner en práctica los conocimientos de programación estructurada
-* Practicar conocimientos de programación Orientada a Objetos en C++
+* Practicar conocimientos de programación estructurada y Orientada a Objetos en C++
 * Practicar operaciones de entrada/salida (E/S) en ficheros de texto
 
 ### Rúbrica de evaluacion de esta práctica
@@ -34,12 +33,12 @@ También el profesorado de la asignatura intervendrá en las discusiones que pud
 ### Introducción
 La búsqueda de patrones es un problema importante y de gran aplicación práctica en el ámbito de las Ciencias de la Computación. 
 El problema surge cuando se quiere comprobar si un patrón está presente en una determinada secuencia de elementos. 
-A modo de ejemplo, esto suele ocurrir cuando se desea localizar una determinada palabra o cadena de caracteres dentro de un fichero de texto. 
+Esto suele ocurrir, por ejemplo, cuando se desea localizar una determinada palabra o cadena de caracteres dentro de un fichero de texto. 
 En muchas herramientas como los editores o procesadores de texto, a menudo se describen los patrones de búsqueda 
-(para ejecutar comandos tipo "buscar y reemplazar") mediante el uso de expresiones regulares. 
+(para ejecutar comandos del tipo "buscar y reemplazar") mediante el uso de expresiones regulares. 
 Sin embargo, este ejercicio se restringe a casos en los que el patrón de búsqueda sea una única cadena. 
 
-Por otro lado, se han diseñado múltiples algoritmos para resolver el problema de la búsqueda de patrones pero, en este caso, 
+Se han desarrollado múltiples algoritmos para resolver el problema de la búsqueda de patrones pero, en este caso, 
 se propone aplicar un algoritmo de búsqueda de patrones basado en un autómata finito. 
 Para aplicar el algoritmo es necesario construir un autómata finito a partir del patrón o cadena de búsqueda. 
 Dicho autómata será luego utilizado para analizar las cadenas de entrada y determinar si en ellas se encuentra o no el patrón buscado.
@@ -79,18 +78,22 @@ Puesto que un alfabeto es un conjunto finito y no vacío de símbolos, se podrí
 De hecho, se propone hacer uso de la clase `Set` diseñada en la práctica anterior adaptándola al caso de caracteres alfanuméricos. 
 Para ello se tendrá en cuenta el código ASCII de cada carácter (letra) como método para establecer una correspondencia entre cadenas 
 de bits y los caracteres alfanuméricos que podrán conformar los símbolos del alfabeto. 
+Así, por ejemplo, puesto que el código ASCII del carácter `a` es 97, la pertenencia de la letra `a` al
+alfabeto se representará incluyendo el número 97 en el conjunto que representa al alfabeto.
 
 El patrón de búsqueda que se proporcione al programa mediante el parámetro `pattern` representará por lo tanto, 
 una cadena formada por *n* letras minúsculas. 
-Partiendo de este patrón se construirá un autómata finito que tenga *n + 1* estados que irán desde *q0* hasta *qn*. 
-En el estado *qi* se debe reconocer el símbolo que se encuentre en la posición *i* del patrón de búsqueda 
-(los símbolos de un patrón de búsqueda se enumeran desde *0* a *n - 1*, de izquierda a derecha). 
-En cada estado *qi* del autómata tendremos dos comportamientos: transitar al estado *qi + 1* con el símbolo `pattern[i]` o 
-transitar al estado *q0* y parar con cualquier otro símbolo. 
-Cuando esto ocurre se sabe que es porque no se ha detectado el patrón en la subcadena de entrada. 
-En el momento en el que se alcance el estado final *qn* sabremos que el patrón ha sido detectado dentro de la cadena de entrada. 
+Los símbolos de este patrón se enumeran desde *0* a *n - 1*, de izquierda a derecha.
 
-A modo de ejemplo, si `pattern = abcb`, deberemos construir un autómata finito con 5 estados que van desde *q0* a *q4*. 
+Partiendo del patrón de búsqueda se construirá un autómata finito con *n + 1* estados enumerados desde *q0* hasta *qn*. 
+En el estado *qi* se debe analizar el símbolo que se encuentre en la posición *i* del patrón de búsqueda.
+
+En cada estado *qi* del autómata hay dos comportamientos posibles: 
+transitar al estado *qi + 1* con el símbolo `pattern[i]` o transitar al estado *q0* y parar con cualquier otro símbolo. 
+Cuando esto ocurre se sabe que es porque no se ha detectado el patrón en la subcadena de entrada. 
+En el momento en el que se alcance el estado final *qn* se habrá determinado que el patrón ha sido detectado en la cadena de entrada. 
+
+A modo de ejemplo, si `pattern = abcb`, se debe construir un autómata finito con 5 estados: *q0*, *q1*, ... *q4*. 
 * Estado *q0*:  
   - Con el símbolo *a* se transita al estado *q1*
   - Con cualquier otro símbolo se transita a *q0* y se para
@@ -106,11 +109,24 @@ A modo de ejemplo, si `pattern = abcb`, deberemos construir un autómata finito 
 * Estado *q4*:  
    - Si se ha alcanzado este estado es que se ha detectado el patrón de búsqueda
 
-Una vez se haya construido el autómata de reconocimiento, será necesario iniciar el proceso de reconocimiento. Dicho proceso deberá realizarse por cada una de las cadenas de entrada (cada cadena de entrada se encuentra en una línea independiente del fichero de entrada). Dada una cadena de entrada *w* con *m* símbolos, el primer análisis de la cadena se realizará desde la posición *j = 0*. Si al analizar la cadena desde esa posición, y siguiendo las transiciones del autómata, alcanzamos el estado final, entonces podremos indicar en la línea correspondiente del fichero de salida que sí hemos detectado el patrón de búsqueda en la cadena de entrada. Si, por el contrario, el reconocimiento nos lleva a transitar al estado inicial *q0* y, por lo tanto, parar, tendremos que mover *j* una posición a la derecha *j = j + 1* y reiniciar de nuevo el proceso de reconocimiento para otra subcadena de la cadena actual. Si hacemos todos los recorridos posibles de la cadena y seguimos sin detectar el patrón, entonces podremos indicar en el fichero de salida que el patrón no ha sido detectado en nuestra cadena de entrada.
+Una vez se haya construido el autómata, será necesario iniciar el proceso de reconocimiento. 
+Dicho proceso deberá realizarse por cada una de las cadenas de entrada (cada cadena de entrada se encuentra en una línea independiente del fichero de entrada). 
+Dada una cadena de entrada *w* con *m* símbolos, el primer análisis de la cadena se realizará desde la posición *j = 0*. 
+Si al analizar la cadena desde esa posición, y siguiendo las transiciones del autómata, se alcanza el estado final, 
+entonces se puede indicar en la línea correspondiente del fichero de salida que sí se ha detectado el patrón de búsqueda en la cadena de entrada. 
+Si, por el contrario, el reconocimiento conduce a transitar al estado inicial *q0* y, por lo tanto, parar, 
+habrá que mover *j* una posición a la derecha *j = j + 1* y reiniciar de nuevo el proceso de reconocimiento para otra subcadena de la cadena actual. 
+Si se realizan todos los recorridos posibles de la cadena y se sigue sin detectar el patrón, 
+entonces se puede indicar en el fichero de salida que el patrón no ha sido detectado en la cadena de entrada.
 
-Cuando finalicemos el reconocimiento sobre una cadena, ya sea determinando que sí que contiene el patrón buscado o, por el contrario, detectando que no lo contiene, pasaremos a realizar el reconocimiento sobre la siguiente cadena especificada en el fichero de entrada. En el caso de que detectemos cadenas con símbolos no pertenecientes a nuestro alfabeto (que en principio definiremos con letras minúsculas) no realizaremos el proceso de reconocimiento; en este caso, escribiremos directamente en la línea correspondiente del fichero de salida la palabra `Error`.
+Cuando finalice el reconocimiento sobre una cadena, ya sea determinando que sí que contiene el patrón buscado o, por el contrario, detectando que no lo contiene, 
+se pasará a realizar el reconocimiento sobre la siguiente cadena especificada en el fichero de entrada. 
+En el caso de que se detecten cadenas con símbolos no pertenecientes al alfabeto (que en principio se define con letras minúsculas) 
+no se realizará el proceso de reconocimiento; en este caso, se escribirá directamente en la línea correspondiente del fichero de salida la palabra `Error`.
 
-**NOTA: Es importante tener en cuenta que para realizar el proceso de reconocimiento es imprescindible utilizar el algoritmo que se ha detallado en este guión y que se basa en la definición de un autómata finito. Es decir, NO se podrán utilizar los diferentes métodos de búsqueda en cadenas de texto que proporciona la clase `string` ni similares.**
+**NOTA: Es importante tener en cuenta que para realizar el proceso de reconocimiento es 
+imprescindible utilizar el algoritmo que se ha detallado en este guión y que se basa en la definición de un autómata finito. 
+NO se podrán utilizar los diferentes métodos de búsqueda en cadenas de texto que proporciona la clase `std::string` ni similares.**
  
 ### Referencias
 * [Wikipedia: búsqueda de patrones] (https://es.wikipedia.org/wiki/B%C3%BAsqueda_de_patrones)
