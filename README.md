@@ -6,7 +6,7 @@ Los objetivos de esta práctica son:
 * Ejecutar comandos de Linux en la máquina virtual (VM) de la asignatura
 * Ser capaz de desarrollar, editar de forma remota usando VSC, compilar y ejecutar programas escritos en C++ en su VM
 * Que el alumnado codifique sus programas siguiendo lo estipulado en la Guía de Estilo de código de Google
-* Que el alumno sea capaz de formatear su códgo en VSC siguiendo la guia de Estilo de Google
+* Que el alumno sea capaz de formatear su código en VSC siguiendo la guia de Estilo de Google
 * Que el alumnado utilice la utilidad make y ficheros Makefile en sus proyectos
 * Poner en práctica los conocimientos de programación estructurada
 * Practicar conocimientos de programación Orientada a Objetos en C++
