@@ -32,7 +32,17 @@ a resolver dichas dudas.
 También el profesorado de la asignatura intervendrá en las discusiones que pudieran suscitarse, si fuera necesario.
     
 ### Introducción
-La búsqueda de patrones es un problema muy importante y de gran aplicación práctica en el ámbito de las Ciencias de la Computación. El problema surge cuando se quiere comprobar si un patrón está presente en una determinada secuencia de elementos. A modo de ejemplo, esto suele ocurrir cuando queremos buscar una determinada palabra o cadena de caracteres dentro de un fichero de texto. En muchas herramientas como los editores o procesadores de texto, a menudo se describen los patrones de búsqueda (para ejecutar comandos tipo "buscar y reemplazar") mediante el uso de expresiones regulares. Sin embargo, nosotros nos centraremos en casos en los que el patrón de búsqueda sea una única cadena. Por otro lado, se han diseñado múltiples algoritmos para resolver el problema de la búsqueda de patrones pero, en este caso, aplicaremos un algoritmo de búsqueda de patrones basado en un autómata finito. Para aplicar este algoritmo es necesario construir un autómata finito a partir del patrón o cadena de búsqueda. Dicho autómata será luego utilizado para analizar las cadenas de entrada y determinar si en ellas se encuentra o no el patrón buscado.
+La búsqueda de patrones es un problema importante y de gran aplicación práctica en el ámbito de las Ciencias de la Computación. 
+El problema surge cuando se quiere comprobar si un patrón está presente en una determinada secuencia de elementos. 
+A modo de ejemplo, esto suele ocurrir cuando se desea localizar una determinada palabra o cadena de caracteres dentro de un fichero de texto. 
+En muchas herramientas como los editores o procesadores de texto, a menudo se describen los patrones de búsqueda 
+(para ejecutar comandos tipo "buscar y reemplazar") mediante el uso de expresiones regulares. 
+Sin embargo, este ejercicio se restringe a casos en los que el patrón de búsqueda sea una única cadena. 
+
+Por otro lado, se han diseñado múltiples algoritmos para resolver el problema de la búsqueda de patrones pero, en este caso, 
+se propone aplicar un algoritmo de búsqueda de patrones basado en un autómata finito. 
+Para aplicar el algoritmo es necesario construir un autómata finito a partir del patrón o cadena de búsqueda. 
+Dicho autómata será luego utilizado para analizar las cadenas de entrada y determinar si en ellas se encuentra o no el patrón buscado.
 
 ### Ejercicio práctico
 
@@ -40,11 +50,13 @@ Se debe diseñar un programa que reciba por línea de comandos tres argumentos: 
 
 `./pattern_search pattern infile.txt outfile.txt`
 
-En `pattern` especificaremos el patrón de búsqueda, que en este caso será una cadena de símbolos de un determinado alfabeto. 
-En el fichero de entrada tendremos una línea por cada cadena que queramos analizar en busca del patrón.
-En el fichero de salida escribiremos una línea con Sí o No en función de si hemos encontrado el patrón en la cadena correspondiente a esa línea del fichero de entrada. 
+El parámetro `pattern` especifica el patrón de búsqueda, que en este caso será una cadena de símbolos de un determinado alfabeto. 
+El fichero de entrada contendrá una línea por cada cadena que se desee analizar en busca del patrón.
+En el fichero de salida el programa escribirá una línea indicando "Sí" o "No" en función de si se ha hallado el patrón en la cadena 
+correspondiente a esa línea del fichero de entrada. 
  
-A modo de ejemplo, si especificamos como cadena de búsqueda `abc` y tenemos el siguiente fichero de entrada:
+A modo de ejemplo, si se especifica como patrón de búsqueda `abc` y el fichero de entrada tiene el siguiente
+contenido:
 
 ```
 caaccab
@@ -53,7 +65,7 @@ abcabc
 aaa
 ```
 
-Entonces el fichero de salida debería contener lo siguiente:
+El fichero de salida deberá contener las siguientes líneas:
 
 ```
 No
@@ -62,9 +74,21 @@ Sí
 No
 ```
 
-En principio, el conjunto de símbolos que utilizaremos como alfabeto serán las letras minúsculas (sin incluir la ñ). Teniendo en cuenta que un alfabeto es un conjunto finito y no vacío de símbolos, entonces podríamos representar nuestro alfabeto con una clase conjunto. De hecho, vamos a hacer uso de la clase `set` diseñada en la práctica anterior pero adaptándola al caso de caracteres alfanuméricos. Para ello podríamos tener en cuenta el código ASCII como método para establecer una correspondencia entre cadenas de bits y los caracteres alfanuméricos que podrán conformar los símbolos de nuestro alfabeto. 
+En principio, el conjunto de símbolos que se utilizará como alfabeto serán las letras minúsculas (sin incluir la ñ). 
+Puesto que un alfabeto es un conjunto finito y no vacío de símbolos, se podría representar el alfabeto con una clase conjunto. 
+De hecho, se propone hacer uso de la clase `Set` diseñada en la práctica anterior adaptándola al caso de caracteres alfanuméricos. 
+Para ello se tendrá en cuenta el código ASCII de cada carácter (letra) como método para establecer una correspondencia entre cadenas 
+de bits y los caracteres alfanuméricos que podrán conformar los símbolos del alfabeto. 
 
-El patrón de búsqueda que se proporcione al programa mediante el parámetro `pattern` representará por lo tanto, una cadena formada por *n* letras minúsculas. Partiendo de este patrón construiremos un autómata finito que tenga *n + 1* estados que irán desde *q0* hasta *qn*. En el estado *qi* se debe reconocer el símbolo que se encuentre en la posición *i* del patrón de búsqueda (los símbolos de un patrón de búsqueda se enumeran desde *0* a *n - 1*, de izquierda a derecha). En cada estado *qi* del autómata tendremos dos comportamientos: transitar al estado *qi + 1* con el símbolo `pattern[i]` o transitar al estado *q0* y parar con cualquier otro símbolo. Cuando esto ocurre se sabe que es porque no se ha detectado el patrón en la subcadena de entrada. En el momento en el que se alcance el estado final *qn* sabremos que el patrón ha sido detectado dentro de la cadena de entrada. 
+El patrón de búsqueda que se proporcione al programa mediante el parámetro `pattern` representará por lo tanto, 
+una cadena formada por *n* letras minúsculas. 
+Partiendo de este patrón se construirá un autómata finito que tenga *n + 1* estados que irán desde *q0* hasta *qn*. 
+En el estado *qi* se debe reconocer el símbolo que se encuentre en la posición *i* del patrón de búsqueda 
+(los símbolos de un patrón de búsqueda se enumeran desde *0* a *n - 1*, de izquierda a derecha). 
+En cada estado *qi* del autómata tendremos dos comportamientos: transitar al estado *qi + 1* con el símbolo `pattern[i]` o 
+transitar al estado *q0* y parar con cualquier otro símbolo. 
+Cuando esto ocurre se sabe que es porque no se ha detectado el patrón en la subcadena de entrada. 
+En el momento en el que se alcance el estado final *qn* sabremos que el patrón ha sido detectado dentro de la cadena de entrada. 
 
 A modo de ejemplo, si `pattern = abcb`, deberemos construir un autómata finito con 5 estados que van desde *q0* a *q4*. 
 * Estado *q0*:  
