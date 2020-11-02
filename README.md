@@ -130,7 +130,7 @@ NO se podrán utilizar los diferentes métodos de búsqueda en cadenas de texto 
 
 ### Depuración de programas
 Incluso los mejores desarrolladores cometen errores. 
-Es por eso que los cualquier programadora debiera estar familiarizada con el uso de un depurador (*debugger*).
+Es por eso que cualquier programadora debiera estar familiarizada con el uso de un depurador (*debugger*).
 Asimismo, y con el uso de un depurador, debiera ser capaz de desarrollar estrategias sólidas para diagnosticar y reparar problemas de código.
 
 Una de las características más útiles de Visual Studio Code (VSC) es la integración del depurador. 
@@ -157,7 +157,7 @@ puede servir como introducción al proceso de depuración de programas.
 En el caso de la asignatura se propone usar el depurador gdb (es es el caso de un "stand-alone debugger")
 pero usándolo a través de la interfaz de VSC, de modo que el enfoque sería similar al de un "integrated
 debugger".
-En el documento se explica los elementos básicos de la depuración de un programa con un debugger:
+En el documento se explican los elementos básicos de la depuración de un programa con un debugger:
 * Setting a breakpoint
 * Step into code
 * Step over code
@@ -170,6 +170,8 @@ Por último el tutorial
 [Learn to debug C++ code using Visual Studio](https://docs.microsoft.com/en-us/visualstudio/debugger/getting-started-with-the-debugger-cpp?view=vs-2019)
 puede servirle de guía para aprender a depurar un programa algo más complejo.
 
+A partir de este punto, la mejor forma de aprender a depurar programas es practicando con todos los que
+escriba de ahora en adelante.
  
 ### Referencias
 * [Wikipedia: búsqueda de patrones] (https://es.wikipedia.org/wiki/B%C3%BAsqueda_de_patrones)
