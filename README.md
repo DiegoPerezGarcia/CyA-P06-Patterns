@@ -179,7 +179,6 @@ escriba de ahora en adelante.
 * [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
 * [Debug helloworld](https://code.visualstudio.com/docs/cpp/config-linux#_debug-helloworldcpp).
 * [Learn to debug C++ code using Visual Studio](https://docs.microsoft.com/en-us/visualstudio/debugger/getting-started-with-the-debugger-cpp?view=vs-2019)
-* [First look at the Visual Studio
-* Debugger](https://docs.microsoft.com/en-us/visualstudio/debugger/debugger-feature-tour?view=vs-2019)
+* [First look at the Visual Studio Debugger](https://docs.microsoft.com/en-us/visualstudio/debugger/debugger-feature-tour?view=vs-2019)
 
 
