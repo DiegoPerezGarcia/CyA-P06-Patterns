@@ -127,8 +127,57 @@ no se realizará el proceso de reconocimiento; en este caso, se escribirá direc
 **NOTA: Es importante tener en cuenta que para realizar el proceso de reconocimiento es 
 imprescindible utilizar el algoritmo que se ha detallado en este guión y que se basa en la definición de un autómata finito. 
 NO se podrán utilizar los diferentes métodos de búsqueda en cadenas de texto que proporciona la clase `std::string` ni similares.**
+
+### Depuración de programas
+Incluso los mejores desarrolladores cometen errores. 
+Es por eso que los cualquier programadora debiera estar familiarizada con el uso de un depurador (*debugger*).
+Asimismo, y con el uso de un depurador, debiera ser capaz de desarrollar estrategias sólidas para diagnosticar y reparar problemas de código.
+
+Una de las características más útiles de Visual Studio Code (VSC) es la integración del depurador. 
+Bajo el control de un depurador se puede recorrer el código mientras se ejecuta, 
+examinando los valores de las variables, las estructuras, el flujo del programa, la salida 
+de la pantalla y otros elementos de la aplicación en busca de errores. 
+Este proceso es más lento que ejecutar el programa fuera del depurador, pero es vital para comprender el funcionamiento interno de una aplicación.
+
+En esta asignatura no se va a exigir ni enseñar el uso de un depurador, pero sí se considera que es una
+herramienta que el alumnado debe conocer y manejar.
+Hay diversos tutoriales que puede Ud. usar para introducirse en el uso de la depuración de código C++ en VSC. 
+Incluímos en este guión algunas referencias que pueden serle de utilidad a este efecto.
+
+
+[Esta referencia](https://devblogs.microsoft.com/cppblog/c-tutorial-debugging-overview/) consideramos que
+debiera ser su punto de partida para aprender a depurar en VSC.
+Realice todos los pasos que se proponen en este tutorial, aunque todo lo relacionado con la depuración se
+encuentra en el apartado [Debug helloworld](https://code.visualstudio.com/docs/cpp/config-linux#_debug-helloworldcpp).
+Tenga en cuenta que ni los nombres de fichero ni el estilo del código en esta referencia de Microsoft siguen
+el estilo marcado por la Guía de Estilo de Google.
+
+A continuación, el tutorial [Debugging Overview](https://devblogs.microsoft.com/cppblog/c-tutorial-debugging-overview/)
+puede servir como introducción al proceso de depuración de programas.
+En el caso de la asignatura se propone usar el depurador gdb (es es el caso de un "stand-alone debugger")
+pero usándolo a través de la interfaz de VSC, de modo que el enfoque sería similar al de un "integrated
+debugger".
+En el documento se explica los elementos básicos de la depuración de un programa con un debugger:
+* Setting a breakpoint
+* Step into code
+* Step over code
+* Inspect variables
+* Modify a variable
+* Examine the call stack
+* Change execution flow
+
+Por último el tutorial 
+[Learn to debug C++ code using Visual Studio](https://docs.microsoft.com/en-us/visualstudio/debugger/getting-started-with-the-debugger-cpp?view=vs-2019)
+puede servirle de guía para aprender a depurar un programa algo más complejo.
+
  
 ### Referencias
 * [Wikipedia: búsqueda de patrones] (https://es.wikipedia.org/wiki/B%C3%BAsqueda_de_patrones)
 * [Wikipedia: código ASCII] (https://es.wikipedia.org/wiki/ASCII)
 * [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
+* [Debug helloworld](https://code.visualstudio.com/docs/cpp/config-linux#_debug-helloworldcpp).
+* [Learn to debug C++ code using Visual Studio](https://docs.microsoft.com/en-us/visualstudio/debugger/getting-started-with-the-debugger-cpp?view=vs-2019)
+* [First look at the Visual Studio
+* Debugger](https://docs.microsoft.com/en-us/visualstudio/debugger/debugger-feature-tour?view=vs-2019)
+
+
