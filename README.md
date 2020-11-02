@@ -91,4 +91,4 @@ Cuando finalicemos el reconocimiento sobre una cadena, ya sea determinando que s
 ### Referencias
 * [Wikipedia: búsqueda de patrones] (https://es.wikipedia.org/wiki/B%C3%BAsqueda_de_patrones)
 * [Wikipedia: código ASCII] (https://es.wikipedia.org/wiki/ASCII)
-* [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) Guía de estilo de código 
+* [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
