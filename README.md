@@ -38,7 +38,7 @@ La búsqueda de patrones es un problema muy importante y de gran aplicación pr�
 
 Se debe diseñar un programa que reciba por línea de comandos tres argumentos: el patrón de búsqueda, un fichero de entrada y un fichero de salida:
 
-./pattern_search pattern infile.txt outfile.txt
+`./pattern_search pattern infile.txt outfile.txt`
 
 En `pattern` especificaremos el patrón de búsqueda, que en este caso será una cadena de símbolos de un determinado alfabeto. 
 En el fichero de entrada tendremos una línea por cada cadena que queramos analizar en busca del patrón.
@@ -46,21 +46,25 @@ En el fichero de salida escribiremos una línea con Sí o No en función de si h
  
 A modo de ejemplo, si especificamos como cadena de búsqueda `abc` y tenemos el siguiente fichero de entrada:
 
-`caaccab`
-`cccabccccc`
-`abcabc`
-`aaa`
+```
+caaccab
+cccabccccc
+abcabc
+aaa
+```
 
 Entonces el fichero de salida debería contener lo siguiente:
 
-`No`
-`Sí`
-`Sí`
-`No`
+```
+No
+Sí
+Sí
+No
+```
 
 En principio, el conjunto de símbolos que utilizaremos como alfabeto serán las letras minúsculas (sin incluir la ñ). Teniendo en cuenta que un alfabeto es un conjunto finito y no vacío de símbolos, entonces podríamos representar nuestro alfabeto con una clase conjunto. De hecho, vamos a hacer uso de la clase `set` diseñada en la práctica anterior pero adaptándola al caso de caracteres alfanuméricos. Para ello podríamos tener en cuenta el código ASCII como método para establecer una correspondencia entre cadenas de bits y los caracteres alfanuméricos que podrán conformar los símbolos de nuestro alfabeto. 
 
-El patrón de búsqueda que se proporcione al programa mediante el parámetro `pattern` representará por lo tanto, una cadena formada por $$n$$ letras minúsculas. Partiendo de este patrón construiremos un autómata finito que tenga $$n + 1$$ estados que irán desde $$q_0$$ hasta $$q_n$$. En el estado $$q_i$$ se debe reconocer el símbolo que se encuentre en la posición $$i$$ del patrón de búsqueda (los símbolos de un patrón de búsqueda se enumeran desde $$0$$ a $$n - 1$$, de izquierda a derecha). En cada estado $$q_i$$ del autómata tendremos dos comportamientos: transitar al estado $$q_{i + 1}$$ con el símbolo `pattern[i]` o transitar al estado $$q_0$$ y parar con cualquier otro símbolo. Cuando esto ocurre se sabe que es porque no se ha detectado el patrón en la subcadena de entrada. En el momento en el que se alcance el estado final $$q_n$$ sabremos que el patrón ha sido detectado dentro de la cadena de entrada. 
+El patrón de búsqueda que se proporcione al programa mediante el parámetro `pattern` representará por lo tanto, una cadena formada por *n* letras minúsculas. Partiendo de este patrón construiremos un autómata finito que tenga *n + 1* estados que irán desde *q_0* hasta *q_n*. En el estado *q_i* se debe reconocer el símbolo que se encuentre en la posición *i* del patrón de búsqueda (los símbolos de un patrón de búsqueda se enumeran desde *0* a *n - 1*, de izquierda a derecha). En cada estado *q_i* del autómata tendremos dos comportamientos: transitar al estado *qi + 1* con el símbolo `pattern[i]` o transitar al estado $$q_0$$ y parar con cualquier otro símbolo. Cuando esto ocurre se sabe que es porque no se ha detectado el patrón en la subcadena de entrada. En el momento en el que se alcance el estado final $$q_n$$ sabremos que el patrón ha sido detectado dentro de la cadena de entrada. 
 
 A modo de ejemplo, si `pattern = abcb`, deberemos construir un autómata finito con 5 estados que van desde $$q_0$$ a $$q_4$$. 
 * Estado $$q_0$$:  
