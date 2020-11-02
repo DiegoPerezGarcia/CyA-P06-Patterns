@@ -64,25 +64,25 @@ No
 
 En principio, el conjunto de símbolos que utilizaremos como alfabeto serán las letras minúsculas (sin incluir la ñ). Teniendo en cuenta que un alfabeto es un conjunto finito y no vacío de símbolos, entonces podríamos representar nuestro alfabeto con una clase conjunto. De hecho, vamos a hacer uso de la clase `set` diseñada en la práctica anterior pero adaptándola al caso de caracteres alfanuméricos. Para ello podríamos tener en cuenta el código ASCII como método para establecer una correspondencia entre cadenas de bits y los caracteres alfanuméricos que podrán conformar los símbolos de nuestro alfabeto. 
 
-El patrón de búsqueda que se proporcione al programa mediante el parámetro `pattern` representará por lo tanto, una cadena formada por *n* letras minúsculas. Partiendo de este patrón construiremos un autómata finito que tenga *n + 1* estados que irán desde *q_0* hasta *q_n*. En el estado *q_i* se debe reconocer el símbolo que se encuentre en la posición *i* del patrón de búsqueda (los símbolos de un patrón de búsqueda se enumeran desde *0* a *n - 1*, de izquierda a derecha). En cada estado *q_i* del autómata tendremos dos comportamientos: transitar al estado *qi + 1* con el símbolo `pattern[i]` o transitar al estado $$q_0$$ y parar con cualquier otro símbolo. Cuando esto ocurre se sabe que es porque no se ha detectado el patrón en la subcadena de entrada. En el momento en el que se alcance el estado final $$q_n$$ sabremos que el patrón ha sido detectado dentro de la cadena de entrada. 
+El patrón de búsqueda que se proporcione al programa mediante el parámetro `pattern` representará por lo tanto, una cadena formada por *n* letras minúsculas. Partiendo de este patrón construiremos un autómata finito que tenga *n + 1* estados que irán desde *q0* hasta *qn*. En el estado *qi* se debe reconocer el símbolo que se encuentre en la posición *i* del patrón de búsqueda (los símbolos de un patrón de búsqueda se enumeran desde *0* a *n - 1*, de izquierda a derecha). En cada estado *qi* del autómata tendremos dos comportamientos: transitar al estado *qi + 1* con el símbolo `pattern[i]` o transitar al estado *q0* y parar con cualquier otro símbolo. Cuando esto ocurre se sabe que es porque no se ha detectado el patrón en la subcadena de entrada. En el momento en el que se alcance el estado final *qn* sabremos que el patrón ha sido detectado dentro de la cadena de entrada. 
 
-A modo de ejemplo, si `pattern = abcb`, deberemos construir un autómata finito con 5 estados que van desde $$q_0$$ a $$q_4$$. 
-* Estado $$q_0$$:  
-  - Con el símbolo $$a$$ se transita al estado $$q_1$$
-  - Con cualquier otro símbolo se transita a $$q_0$$ y se para
-* Estado $$q_1$$:  
-   - Con el símbolo $$b$$ se transita al estado $$q_2$$
-   - Con cualquier otro símbolo se transita a $$q_0$$ y se para
-* Estado $$q_2$$:  
-   - Con el símbolo $$c$$ se transita al estado $$q_3$$
-   - Con cualquier otro símbolo se transita a $$q_0$$ y se para
-* Estado $$q_3$$:  
-   - Con el símbolo $$b$$ se transita al estado $$q_4$$
-   - Con cualquier otro símbolo se transita a $$q_0$$ y se para
-* Estado 4:  
+A modo de ejemplo, si `pattern = abcb`, deberemos construir un autómata finito con 5 estados que van desde *q0* a *q4*. 
+* Estado *q0*:  
+  - Con el símbolo *a* se transita al estado *q1*
+  - Con cualquier otro símbolo se transita a *q0* y se para
+* Estado *q1*:  
+   - Con el símbolo *b* se transita al estado *q2*
+   - Con cualquier otro símbolo se transita a *q0* y se para
+* Estado *q2*:  
+   - Con el símbolo *c* se transita al estado *q3*
+   - Con cualquier otro símbolo se transita a *q0* y se para
+* Estado *q3*:  
+   - Con el símbolo *b* se transita al estado *q4*
+   - Con cualquier otro símbolo se transita a *q0* y se para
+* Estado *q4*:  
    - Si se ha alcanzado este estado es que se ha detectado el patrón de búsqueda
 
-Una vez se haya construido el autómata de reconocimiento, será necesario iniciar el proceso de reconocimiento. Dicho proceso deberá realizarse por cada una de las cadenas de entrada (cada cadena de entrada se encuentra en una línea independiente del fichero de entrada). Dada una cadena de entrada $$w$$ con $$m$$ símbolos, el primer análisis de la cadena se realizará desde la posición $$j = 0$$. Si al analizar la cadena desde esa posición, y siguiendo las transiciones del autómata, alcanzamos el estado final, entonces podremos indicar en la línea correspondiente del fichero de salida que sí hemos detectado el patrón de búsqueda en la cadena de entrada. Si, por el contrario, el reconocimiento nos lleva a transitar al estado inicial $$q_0$$ y, por lo tanto, parar, tendremos que mover $$j$$ una posición a la derecha $$j = j + 1$$ y reiniciar de nuevo el proceso de reconocimiento para otra subcadena de la cadena actual. Si hacemos todos los recorridos posibles de la cadena y seguimos sin detectar el patrón, entonces podremos indicar en el fichero de salida que el patrón no ha sido detectado en nuestra cadena de entrada.
+Una vez se haya construido el autómata de reconocimiento, será necesario iniciar el proceso de reconocimiento. Dicho proceso deberá realizarse por cada una de las cadenas de entrada (cada cadena de entrada se encuentra en una línea independiente del fichero de entrada). Dada una cadena de entrada *w* con *m* símbolos, el primer análisis de la cadena se realizará desde la posición *j = 0*. Si al analizar la cadena desde esa posición, y siguiendo las transiciones del autómata, alcanzamos el estado final, entonces podremos indicar en la línea correspondiente del fichero de salida que sí hemos detectado el patrón de búsqueda en la cadena de entrada. Si, por el contrario, el reconocimiento nos lleva a transitar al estado inicial *q0* y, por lo tanto, parar, tendremos que mover *j* una posición a la derecha *j = j + 1* y reiniciar de nuevo el proceso de reconocimiento para otra subcadena de la cadena actual. Si hacemos todos los recorridos posibles de la cadena y seguimos sin detectar el patrón, entonces podremos indicar en el fichero de salida que el patrón no ha sido detectado en nuestra cadena de entrada.
 
 Cuando finalicemos el reconocimiento sobre una cadena, ya sea determinando que sí que contiene el patrón buscado o, por el contrario, detectando que no lo contiene, pasaremos a realizar el reconocimiento sobre la siguiente cadena especificada en el fichero de entrada. En el caso de que detectemos cadenas con símbolos no pertenecientes a nuestro alfabeto (que en principio definiremos con letras minúsculas) no realizaremos el proceso de reconocimiento; en este caso, escribiremos directamente en la línea correspondiente del fichero de salida la palabra `Error`.
 
